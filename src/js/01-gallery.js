@@ -18,7 +18,6 @@ const cardListItem = ({ original, preview, description }) => {
 </div>`;};
 const cardListItemNew = galleryItems.map(cardListItem).join("");
 const cardsMarkup = cardListItem (galleryItems);
-listItem.addEventListener(`click`, onPaletteContainerClick);
 listItem.insertAdjacentHTML("beforeend", cardListItemNew);
 console.log(cardListItemNew); 
 function onPaletteContainerClick(evt) {
