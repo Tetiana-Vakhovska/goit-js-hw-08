@@ -29,6 +29,7 @@ function onFormSubmit(event) {
 
   if (email.value === '' || message.value === '') {
     return alert(`Будь ласка, заповніть всі обов'язкові поля.`);
+   
   }
 
   localStorage.removeItem(STORAGE_KEY);
