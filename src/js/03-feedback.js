@@ -1,41 +1,33 @@
 import throttle from 'lodash.throttle';
-const STORAGE_KEY = 'feedback-form-state';
-const refs ={
-  form : document.querySelector('.js-feedback-form'),
-  textarea:document.querySelector('.js-feedback-form area')
-}
-
-form.addEventListener('input', throttle(onInputData, 500));
-form.addEventListener('submit', onFormSubmit);
-let dataForm = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-const { email, message } = form.elements;
-reloadPage();
-function onInputData(event) {
-  dataForm = { email: email.value, message: message.value };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(dataForm));
-}
-function reloadPage() {
-  if (dataForm) {
-    email.value = dataForm.email || '';
-    message.value = dataForm.message || '';
-  }
-}
-function onFormSubmit(event) {
-  event.preventDefault();
-  console.log({ email: email.value, message: message.value });
-  if (email.value === '' || message.value === '') {
-    return alert(`Будь ласка, заповніть всі обов'язкові поля.`);
-   
-  }
-  localStorage.removeItem(STORAGE_KEY);
-  event.currentTarget.reset();
-  dataForm = {};
-}
-function populateTextareal(){
-const savedMessage = localStorage.getItem('feedback-msg');
-if (savedMessage){
-  console.log(savedMessage);
-  form=savedMessage;
-}
-
-}
+const form = document.querySelector(".feedback-form");
+const feedbackInput = document.querySelector(".feedback-form input");
+const feedbackMessage = document.querySelector(".feedback-form textarea");
+const formEl = function () {
+  localStorage.setItem(
+    "feedback-form-state",
+    JSON.stringify({
+      email: feedbackInput.value,
+      message: feedbackMessage.value,
+    })
+  );
+};
+const getFeedBack = function () {
+  const data = JSON.parse(localStorage.getItem("feedback-form-state"));
+  if (!data) return;
+  feedbackInput.value = data.email;
+  feedbackMessage.value = data.message;
+};
+const submit = function (evt) {
+  evt.preventDefault();
+  console.log({
+    email: feedbackInput.value,
+    message: feedbackMessage.value,
+  });
+  form.reset();
+  localStorage.clear();
+};
+feedbackInput.addEventListener("input", throttle(formEl, 500));
+feedbackMessage.addEventListener("input", throttle(formEl), 500);
+form.addEventListener("submit", submit);
+getFeedBack();
+feedbackInput.value.trim() != "" && feedbackMessage.value.trim() != ""
