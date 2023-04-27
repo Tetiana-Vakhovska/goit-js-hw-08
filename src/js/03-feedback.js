@@ -9,25 +9,34 @@ const formEl = function () {
       email: feedbackInput.value,
       message: feedbackMessage.value,
     })
+    
   );
+  
 };
 const getFeedBack = function () {
+
   const data = JSON.parse(localStorage.getItem("feedback-form-state"));
   if (!data) return;
   feedbackInput.value = data.email;
   feedbackMessage.value = data.message;
 };
 const submit = function (evt) {
-  evt.preventDefault();
-  console.log({
-    email: feedbackInput.value,
-    message: feedbackMessage.value,
-  });
-  form.reset();
-  localStorage.clear();
+  if (feedbackInput.valuee!= undefined && feedbackMessage.value!=undefined){
+    return; 
+  } else {
+    evt.preventDefault();
+    console.log({
+      email: feedbackInput.value,
+      message: feedbackMessage.value,
+    });
+    form.reset();
+    localStorage.clear();
+  }
+ 
+  
+  
 };
 feedbackInput.addEventListener("input", throttle(formEl, 500));
 feedbackMessage.addEventListener("input", throttle(formEl), 500);
 form.addEventListener("submit", submit);
 getFeedBack();
-feedbackInput.value.trim() != "" && feedbackMessage.value.trim() != ""
