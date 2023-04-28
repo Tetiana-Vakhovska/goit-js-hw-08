@@ -35,7 +35,7 @@ const submit = function (evt) {
   }
    
     form.reset();
-    localStorage.removeItem();
+    localStorage.clear();
   }
 feedbackInput.addEventListener("input", throttle(formEl, 500));
 feedbackMessage.addEventListener("input", throttle(formEl), 500);

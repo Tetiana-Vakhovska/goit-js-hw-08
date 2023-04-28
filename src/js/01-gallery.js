@@ -2,33 +2,31 @@
 import { galleryItems } from './gallery-items';
 // Change code below this line
 
-import "simplelightbox/dist/simple-lightbox.min.css"
 console.log(galleryItems);
-const listItem = document.querySelector(".gallery");
-const cardListItem = ({ original, preview, description }) => {
-    return `<div class="gallery__item">
-  <a class="gallery__link" href="${original}">
+import "simplelightbox/dist/simple-lightbox.min.css"
+const galleryBox=document.querySelector('gallery');
+
+(function  () {
+ const markUp=galleryItems.map(( {preview, original,description})=>
+ `<li class ="gallery_item">
+ <a class="gallery_link"  href="${original}">
         <img
           class="gallery__image"
-          src="${ preview}"
-        data-source="${original}"
+          src="${preview}"
           alt="${description}"
         />
-        </a>
-</div>`;};
-const cardListItemNew = galleryItems.map(cardListItem).join("");
-const cardsMarkup = cardListItem (galleryItems);
-listItem.insertAdjacentHTML("beforeend", cardListItemNew);
-console.log(cardListItemNew); 
-function onPaletteContainerClick(evt) {
-  evt.preventDefault()
-  const instance = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
+      </a>
+      </li>`) .join('');
+galleryBox.insertAdjacentHTML('beforeend', markUp);
+new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPotion:'bottom',
+  captiondelay: 250,
+  
 });
+  })()
+  
+
+
 
   
-}
-
-console.log(galleryItems);
