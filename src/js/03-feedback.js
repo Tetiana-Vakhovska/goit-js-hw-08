@@ -21,7 +21,10 @@ const getFeedBack = function () {
 const submit = function (evt) {
     evt.preventDefault();
    
-    if (feedbackInput.value===""  || feedbackMessage.value==="" ) {return;
+    if (feedbackInput.value===""  || feedbackMessage.value==="" ) {
+      alert ('Будь ласка заповніть всі поля форми'
+      );
+      return ;
   } 
   else { 
     console.log({
@@ -32,7 +35,7 @@ const submit = function (evt) {
   }
    
     form.reset();
-    localStorage.clear();
+    localStorage.removeItem();
   }
 feedbackInput.addEventListener("input", throttle(formEl, 500));
 feedbackMessage.addEventListener("input", throttle(formEl), 500);
