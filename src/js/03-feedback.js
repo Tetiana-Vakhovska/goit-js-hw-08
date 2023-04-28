@@ -8,10 +8,8 @@ const formEl = function () {
     JSON.stringify({
       email: feedbackInput.value,
       message: feedbackMessage.value,
-    })
-    
+    }) 
   );
-  
 };
 const getFeedBack = function () {
 
@@ -21,21 +19,21 @@ const getFeedBack = function () {
   feedbackMessage.value = data.message;
 };
 const submit = function (evt) {
-  if (feedbackInput.valuee!= undefined && feedbackMessage.value!=undefined){
-    return; 
-  } else {
     evt.preventDefault();
+   
+    if (feedbackInput.value===""  || feedbackMessage.value==="" ) {return;
+  } 
+  else { 
     console.log({
-      email: feedbackInput.value,
-      message: feedbackMessage.value,
-    });
+    email: feedbackInput.value,
+    message: feedbackMessage.value,
+  });
+    
+  }
+   
     form.reset();
     localStorage.clear();
   }
- 
-  
-  
-};
 feedbackInput.addEventListener("input", throttle(formEl, 500));
 feedbackMessage.addEventListener("input", throttle(formEl), 500);
 form.addEventListener("submit", submit);
